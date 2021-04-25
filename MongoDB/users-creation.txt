@@ -1,0 +1,4 @@
+Get users existing in the database 
+-> db.getUsers(); 
+
+Create User: db.createUser({user : "Sunil", pwd:"password", roles : [{role:"userAdmin", db:"_COLLECTION_NAME_"}]}); 
