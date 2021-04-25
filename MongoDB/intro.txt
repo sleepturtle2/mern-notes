@@ -1,0 +1,168 @@
+-> NoSQl (Not Only SQl), Non-Relational management system, contrast to Relational databases like Oracle , mySQL, DB2
+
+Why do we need Non-Relational management systems?
+With increase in internet, companies like Amazon, Google, Yahoo they started getting huge amount of unstructured/semi-structured/unpredictable data (Big Data). RDBMS are designed to handle structured and limited data. For this unstructured, large volumes of data, NoSQl databases are needed. 
+
+Features: 
+-> Stores large volumes of structured, semi-structured and unstructured data
+-> High performance, high scalability and high availability 
+-> Quick Iteration
+-> OOP that is easy to use and flexible 
+-> Dynamic Schemas
+-> Auto Sharding
+-> Replication
+
+
+Types of NoSQl databases: 
+-> Key-value stores : Redis, Dynamo, Riak
+-> Column-oriented : BigTable, Cassandra, SimpleDB
+-> Graph : OrientDB, Neo4J, Titan
+-> Document-oriented : MongoDB (json objects), CouchDB
+
+
+MongoDB Terminology: 
+
+-> record : document which is data structure composed of field and value 
+( Analogy ->  Table = Collections, Rows = Documents ) 
+-> Stored in json objects
+-> embedded documents and arrays reduce need for expensive joins 
+-> dynamic queries on documents using document-based query language 
+-> conversion of objects to db objects is not neeeded
+-> high performance because it uses internal memory to store working set for quick data access 
+
+
+Diff bw MongoDB and RDBMS : 
+RDBMS : Server > Datanases > Tables (schemas and joins(expensive)) > Rows (structured data, has limits)
+MongoDB : Server > Databases > Collections (no schemas; decided on the go, embedded documents replace joins )> Documents (all types of data, huge amounts of data) 
+
+
+    CREATE FIRST DATABASE 
+-> mongo 
+-> use DB_NAME
+-> db.COLLECTION_NAME.insert({ _JS-OBJECT_ })
+-> db.COLLECTION_NAME.find() //displays collection 
+-> db.COLLECTION_NAME.find().pretty() //readable format 
+
+
+    CREATING A DOCUMENT AND SAVING IT TO COLLECTION 
+-> var articleInfo = {} //empty document 
+        articleInfo.articleName="abc"; //add properties 
+        articleInfo.author="xyz";
+
+-> db.COLLECTION_NAME.save(DOCUMENT_NAME); 
+
+
+
+DROPPING A DATABASE 
+-> show dbs 
+-> use DB_NAME 
+->  db.dropDatabase() 
+
+
+    CREATING A COLLECTION -> db.createCollection(name, options)
+-> db.createCollection("articles"); 
+->  show collections; 
+
+-> db.createCollection("blogs", { capped : true, autoIndexID : true, size : 367900, max : 1000 } ) ; 
+
+
+    DISPLAYING A COLLECTION  
+db.COLLECTION_NAME.find().pretty(); 
+
+
+
+    DROPPING A COLLECTION 
+-> db.COLLECTION_NAME.drop(); //returns true or false, if it can be dropped or not 
+
+
+
+    LOADING FROM FILE 
+-> mongo
+-> load(PATH_TO_FILE)
+-> db.COLLECTION_NAME.find().pretty() // Display a collection
+
+
+
+    READING AND QUERYING 
+db.COLLECTION_NAME.find({PROPERTY_NAME}).pretty(); 
+eg -> db.studentInfo.find({name.firstName}).pretty(); 
+eg -> db.studentInfo.find({"age":{$eq:12}}).pretty(); 
+
+//less than ($lt) and greater than ($gt)
+->  db.studentInfo.find({"age" : {$lt : 19}}).pretty(); 
+->  db.studentInfo.find({"age" : {$gt : 19}}).pretty(); 
+
+//other query operators : 
+-> Greater Than Equal to : $gte 
+-> less than equal to : $lte 
+-> not equal : ne 
+-> $in : eg -> {$in : [A, B, C]} 
+->  $nin : eg -> {$nin : [A, B, C]}
+-> $exists : {"subjects" : {$exists : true, $nin : [A, B, C]}}  
+
+
+
+    UPDATING DOCUMENTS 
+-> db.COLLECTION_NAME.update({ "name.firstName" : "Sunil"}, {$set: {"age":17}}); 
+// sets the field age as 17 for the ones with firstName of name is Sunil 
+
+-> db.COLLECTION_NAME.update({ "name.firstName" : "Sunil"}, {$set: {"age":17}, {upsert : true}}); 
+/* upsert= true : If it finds matching document, it will update, else it will add 
+upsert = false : If it does not find matching document, it will not add. */
+
+->  db.COLLECTION_NAME.update({ "name.firstName" : "Sunil"}, {$set: {"subjects.1":"Science"}});
+//subjects.1 means the element at index 1 of the array subjects. 0 based indexing 
+
+
+
+
+
+    DELETING DOCUMENTS 
+-> db.COLLECTION_NAME.remove({"name.firstName" : "Alan"})
+
+-> db.studentInfo.remove({attendance.Jan:{$eq : "90%"}})
+//will remove all documents with matching criteria
+
+-> db.COLLECTION_NAME.remove( { "subjects" : "Maths"} , 1) //does not work , please check
+//will remove only the first document with matching criteria
+
+-> db.COLLECTION_NAME.remove({}); 
+//will remove all the documents  
+db.studentInfo.remove({attendance:{$eq : "90%"} , 1})
+
+
+
+    PERFORMANCE TUNING WITH INDEXES
+//instead of searching through all documents, performance is improved if we provide indices in mongo (array B-Tree indices)
+-> db.COLLECTION_NAME.find({ _id:ObjectId("OBJECT_ID")}) 
+
+
+CREATING INDEX 
+//1 means ascending order, -1 is descending order 
+-> db.COLLECTION_NAME.createIndex({age:1}); 
+-> db.COLLECTION_NAME.find({ age : 12}) //now this scans only one document cause index is created 
+
+
+    FINDING INDEXES IN A COLLECTION
+-> db.COLLECTION_NAME.getIndexes(); 
+
+DROPPING INDEX
+db.COLLECTION_NAME.dropIndexes({ age : 1})
+
+
+OBJECTID IN MONGO 
+-> Immutable
+-> Unique 
+-> bson datatype 
+-> 12 byte value (time stamp + random + incremental)
+
+
+CREATING OBJECTID 
+-> db.COLLECTION_NAME.insert( { _id:001, "product" : "Television" }); 
+
+
+ADVANTAGES OF DEFAULT OBJECT ID 
+-> we can get the timestamp from the default value 
+DISADVANTAGE 
+-> Too long, while referencing 
+

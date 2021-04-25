@@ -1,0 +1,182 @@
+Key of Data Modeling: 
+-> Structure of Documents 
+-> Relationships between data 
+
+Tools to represent Relationships: 
+-> References 
+-> Embedded Data 
+
+Reference Example: 
+----------------------------------
+Employee Document
+{
+    id : <objectId_1>, 
+    employee_name:"Sunil", 
+    designation:"Trainer"
+}
+
+Address Document 
+{
+    id:<objectId_2>, 
+    employee_id: <objectId_1>, 
+    city:"Bangalore", 
+    country:"India"
+}
+
+Contact Document 
+{
+    id: <objectId_3>, 
+    employee_id:<objectId_1>, 
+    mobile_no: 6291864644, 
+    email_id:xyz@gmail.com
+}
+------------------------------------
+
+Embedded Document Example: 
+----------------------------------
+{
+    id:<objectId_1>, 
+    employee_name:"Sunil", 
+    designation:"Trainer", 
+    address:{                   //first embedded doc 
+        city:"Bangalore,            
+        country:"India"
+    }, 
+    contact:{                   //second embedded doc 
+        mobile_no:6291864644, 
+        email:xyz@gmail.com
+    }
+}
+
+
+    RELATIONSHIPS IN MONGO
+-> One-to-one (1:1) Relationships
+-> One-to-many (1:N) Relationships
+-> Many-to-Many(M:N) Relationships 
+
+    1:1 
+---------------------------------------
+Let's say we have 2 documents : Customer and Address and we want to achieve a 1:1 Relationship
+
+Customer{                              
+    name : "Anil Ambani", 
+    business: "Telecom"
+}
+
+Address{
+    street: "10 Andheri East", 
+    city: "Mumbai", 
+    state : "Maharashtra"
+}
+
+Using Embedding: 
+{
+    name : "Anil Ambani", 
+    business:"Telecom", 
+    address:{
+        street:"10 Andheri East", 
+        city:"Mumbai", 
+        state:"Maharashtra"
+    }
+}
+
+Using Referencing:
+{
+    _id:101, 
+    name:"Anil Ambani", 
+    business:"Telecom"
+}
+{
+    cust_id: 101, 
+    street: "10 Andheri East", 
+    city:"Mumbai", 
+    state:"Maharashtra"
+}
+------------------------------------------
+
+1:N 
+-----------------------------------------
+Student ----1:N-----Subjects
+
+Student{
+    name : "Sunil", 
+    school:"DPS"
+}
+Subjects{
+    {
+        Teacher:"John Carry", 
+        Subject:"Science"
+    }, 
+    {
+        Teacher:"Mark T", 
+        Subject:"Biology"
+    }
+}
+
+Using embedding: 
+{
+    name : "Sunil", 
+    school : "DPS", 
+    subjects:[
+        {
+            Teacher:"John Carry", 
+        Subject:"Science"
+        }, 
+        {
+            Teacher:"Mark T", 
+        Subject:"Biology"
+        }
+    ]
+}
+
+Using Referencing: 
+{
+    _id:101, 
+    name: "Anil Ambani", 
+    school:"DPS"
+}
+
+{
+    student_id : 101, 
+    Teacher: "John Carry", 
+    Subject: "Science"
+}
+{
+    student_id: 101, 
+    Teacher: "Mark T", 
+    Subject: "Biology"
+}
+----------------------------------------------
+
+M:N Relationships
+-------------------------------------------------
+
+Author-----M:N----Articles 
+
+
+Using 2-way embedding: 
+Author{
+{
+    id:1, 
+    name: "A", 
+    articles : [1,2]
+},
+{
+    id:2,
+    name:"B", 
+    articles:[2,3,4]
+} 
+}
+
+Article{
+    {
+        id:1, 
+        title: "Mongo", 
+        authors:[1,2]
+    }, 
+    {
+        id:2, 
+        title:"RDBMS", 
+        author:[2]
+    }
+}

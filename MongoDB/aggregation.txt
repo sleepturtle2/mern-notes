@@ -1,0 +1,35 @@
+WHAT IS IT 
+-> Process data records and returns results 
+-> Groups values from various documents in collection together 
+-> Performs various operations on the grouped data 
+
+
+ //Equivalent of COUNT(*) and GROUP BY in RDBMS 
+
+
+ OPERATIONS IN aggregate() METHOD
+ 
+ -> $sum, $avg, $min, $max, $first, $last
+EXAMPLE:
+ 
+ -> db.COLLECTION_NAME.aggregate( [ { $group: {_id:"author",total_posts:{$sum:1}}}]);
+ It will group the documents based on author names, and count the number of posts of that author, starting with sum value 1.
+
+-> db.COLLECTION_NAME.distinct("subjects"); 
+This will search across all documents for this particular object and return all the distinct values across all of them 
+
+-> db.COLLECTION_NAME.count(); 
+Counts the number of documents in the collection. 
+
+-> db.COLLECTION_NAME.find({"subjects":"Maths"}).count()
+Counts the number of times 'Maths' value is repeated in 'subjects' property across all documents in the collection 
+
+
+SORTING DOCUMENTS 
+-> db.COLLECTION_NAME.find().sort({age:1})
+Sorts the documents in the ascending order of property 'age'. 1 is ascending order, -1 is descending order 
+
+-> db.COLLECTION_NAME.find().sort({"name.firstName":1})
+Self explanatory 
+
+-> db.COLLECTION_NAME.find().sort({$natural:1})
