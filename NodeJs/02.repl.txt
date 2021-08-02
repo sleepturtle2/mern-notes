@@ -1,0 +1,17 @@
+The REPL feature of Node is very useful in experimenting with Nodejs code and to debug js codes.
+
+REPL:
+Read - Read user's input, parses the input into JS data-structure and stores in memory.
+Eval - Takes and evaluates the data-structure
+Print - Prints the result
+Loop - Loops the above command until the user presses Ctrl+C twice.
+
+To enter REPL mode, type 'node' in terminal.
+-> Type '.help' to see help options
+
+REPL :
+1. js expression (9+2, 4-2, etc)
+2. use variables
+3. multi-line code (loops etc)
+4. use (_) to get the last result
+5. we can use editor mode (type '.editor' to enter editor mode. ^D to finish, ^C to cancel)

@@ -1,0 +1,26 @@
+WHAT IS NODEJS?
+NodeJs is a Javascript runtime* built on Chrome's V8 Javascript engine.
+NodeJs is Javascript running on the server.
+
+*Js runtime - Runtime environment is just the environment your application is running in. For eg, when we start the node server (npm run start), it creates a runtime environment.
+
+* -> Javascript is a client-side programming language(running only on the browser). But now with node, we can run JS in server side also.
+
+*-> like Chrome's V8 engine, Firefox's js engine is called SpiderMonkey, Safari's js engine is called Nitro.
+
+*-> Nodejs is not a framework/library. It is simply a runtime environment.
+
+
+WHEN TO USE NODEJS?
+
+->I/O bound applications
+  ->Data Streaming apps (endless scrolling)
+  ->Real time chat apps
+->Famous apps using Nodejs : PayPal, LinkedIn, Netflix, Uber, eBay, Walmart, Groupon
+
+WHEN CAN YOU NOT USE NODEJS?  in CPU intensive applications
+
+
+PREREQUISITES:
+ES5 & ES6 | ECMAScript 6
+Client Server Model
