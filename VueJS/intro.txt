@@ -62,10 +62,26 @@ Standard tooling for Vue.js development
 ->Integrate testing, TypeScript support, ESLint & more
 
 Component structure of Vue:
+#Important Trivia:
+1-> after every section, give a comma, even if it is the last section for eg
+methods: {
+  function(){
+
+  },
+},
+
+2-> like in node we have JSON.parse, in vue we have .json, for eg
+async function(){
+  const var = await fetch('url_which_returns_a_response')
+  const var2 = await var.json()
+}
+
+-----------
 Vue3:
 template - html attributes(can be used interchangebly in the createApp or in the html)
-date - a function always, containing return, which returns an object
+data - a function always, containing return, which returns an object
 in img, you cannot simply write src={{image}}, instead you need to declare that it is going to be a dynamic variable using the words 'v-bind:' before the src or alt tags like this
 <img v-bind:src="picture_url" />
 shorthand for v-bind: is : , as shown here:
 <img :src="picture_url" />
+events-  v-on:click="function()" (functions inside Vue.createApp can access data members using this keyword)
