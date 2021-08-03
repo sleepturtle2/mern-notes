@@ -1,0 +1,71 @@
+Vue is a frontend JavaScript framework for building websites & user interfaces.
+
+Vue is generally used to create single-page apps that run on the client, but can be used to create fullstack applications by making HTTP requests to a backend server. Vue is popular with Node.js & Express (MEVN Stack)
+
+Vue can also be run on the server-side by using a SSR framework like Nuxt
+
+Why use Vue?
+->Create dynamic frontend apps & websites
+->Easy learning curve
+->Easy to integrate with other projects
+->Fast and lightweight
+->Virtual DOM
+->Extremely popular
+->Great community
+
+Basic Layout of a Vue Component:
+
+<template>
+  <header>
+    <h1>{{title}}</h1>
+  </header>
+</template>
+
+<script>
+  export default {
+    props: {
+      title: String,
+    },
+  }
+</script>
+
+<style scoped>
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+</style>
+
+Components include a template for markup, logic including any state/data/methods as well as the styling for the component
+
+You can also pass "props" into a component
+<Header title="Task Tracker" />
+
+
+Working with State/Data :
+Components can have their own state which can determine how a specific component behaves and what data is displayed.
+
+Some state may be local to a specific component and some may be "global" or "app" level state that needs to be shared with multiple components
+
+Vuex is a state manager for global state in larger applications
+
+Options API vs Composition API
+Vue3 has the composition API, which aims to address code reusability and readability in Vue3, especially in larger applications.
+
+Vue CLI:
+Standard tooling for Vue.js development
+->Command line interface for creating Vue apps
+->Dev server and easy production build
+->Optional GUI for managing Vue projects
+->Integrate testing, TypeScript support, ESLint & more
+
+Component structure of Vue:
+Vue3:
+template - html attributes(can be used interchangebly in the createApp or in the html)
+date - a function always, containing return, which returns an object
+in img, you cannot simply write src={{image}}, instead you need to declare that it is going to be a dynamic variable using the words 'v-bind:' before the src or alt tags like this
+<img v-bind:src="picture_url" />
+shorthand for v-bind: is : , as shown here:
+<img :src="picture_url" />
